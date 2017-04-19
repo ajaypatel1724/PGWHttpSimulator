@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+	<constant name="struts.action.extension" value="do"/>
+	<constant name="struts.action.excludePattern" value="/jcaptcha"/>
+	<constant name="struts.i18n.encoding" value="ISO-8859-1"/>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="pgwsimulator" namespace="/" extends="struts-default">
+	    
+        <!-- map global results -->
+		<global-results>			
+			<result name="error">/jsp/Error.jsp</result>
+			<result name="redirect" type="redirect" >${url}</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+		
+		<action name="processPayment" class="com.elitecore.elitepaygateway.PaymentAction" method="processPayment">			
+			<result>/jsp/PaymentInfo.jsp</result>						
+			<result name="ERROR">/jsp/ErrorDetail.jsp</result>
+        </action>
+        
+        <action name="processPay">
+        	<result>/jsp/processPayment.jsp</result>
+        </action>
+	</package>		
+</struts>
